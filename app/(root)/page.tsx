@@ -8,6 +8,8 @@ import ClientRedirect from '@/components/ClientRedirect'
 import { getDocuments } from '@/lib/actions/room.actions'
 import Link from 'next/link'
 import { dateConverter } from '@/lib/utils'
+import { DeleteModal } from '@/components/DeleteModal'
+import { Notifications } from '@/components/Notifications'
 
 const Home = async () => {
   // TODO: this will trigger this error: https://github.com/vercel/next.js/discussions/59493
@@ -20,7 +22,7 @@ const Home = async () => {
     <main className="home-container">
       <Header className="sticky">
         <div className="flex items-center gap-2 lg:gap-4">
-          Notification
+          <Notifications />
           <SignedIn>
             <UserButton />
           </SignedIn>
@@ -55,7 +57,9 @@ const Home = async () => {
                         <p className='text-sm font-light text-blue-100'>Created about {dateConverter(createdAt)}</p>
                       </div>
                     </Link>
-                    {/* TODO: Add delete button */}
+                    <DeleteModal 
+                      roomId={id}
+                    />
                   </li>
                 ))
               }
